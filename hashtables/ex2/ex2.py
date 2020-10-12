@@ -6,9 +6,16 @@ class Ticket:
 
 
 def reconstruct_trip(tickets, length):
-    """
-    YOUR CODE HERE
-    """
-    # Your code here
+    cache = {}  # create cache/hashtable of boarding passes
+    itinerary = []  # list of destinations
+    for t in tickets:  # for loop that adds all 'flights' to created cache/hashtable
+        cache[t.source] = t.destination
 
-    return route
+    itinerary.append(cache['NONE'])  # first flight out
+
+    for d in range(1, length):
+        next_stop = itinerary[d-1]
+        if next_stop in cache:
+            itinerary.append(cache[next_stop])  # add trip to list
+
+    return itinerary
